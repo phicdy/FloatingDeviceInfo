@@ -32,6 +32,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupActionBar()
+        startService(Intent(this, FloatingDeviceInfoService::class.java))
     }
 
     /**
