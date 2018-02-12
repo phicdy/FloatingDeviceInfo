@@ -2,11 +2,11 @@
 
     <ListPreference
         android:defaultValue="0"
-        android:entries="@array/pref_list_places"
-        android:entryValues="@array/pref_example_list_values"
-        android:key="example_list"
+        android:entries="@array/pref_list_position"
+        android:entryValues="@array/pref_list_position_values"
+        android:key="position_list"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
-        android:title="@string/pref_title_place" />
+        android:title="@string/pref_title_position" />
 
 </PreferenceScreen>
