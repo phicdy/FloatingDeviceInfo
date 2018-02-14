@@ -16,6 +16,8 @@ import android.preference.PreferenceManager
 import android.preference.RingtonePreference
 import android.text.TextUtils
 import android.view.MenuItem
+import com.phicdy.floatingdeviceinfo.presenter.SettingsActivityPresenter
+import com.phicdy.floatingdeviceinfo.view.activity.SettingsView
 
 /**
  * A [PreferenceActivity] that presents a set of application settings. On
@@ -27,10 +29,15 @@ import android.view.MenuItem
  * for design guidelines and the [Settings API Guide](http://developer.android.com/guide/topics/ui/settings.html)
  * for more information on developing a Settings UI.
  */
-class SettingsActivity : AppCompatPreferenceActivity() {
+class SettingsActivity : AppCompatPreferenceActivity(), SettingsView {
+
+    private lateinit var presenter: SettingsActivityPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        presenter = SettingsActivityPresenter(this)
+
         setupActionBar()
         startService(Intent(this, FloatingDeviceInfoService::class.java))
     }
