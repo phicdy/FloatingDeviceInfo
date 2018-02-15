@@ -30,24 +30,22 @@ import com.phicdy.floatingdeviceinfo.view.activity.SettingsView
  * for more information on developing a Settings UI.
  */
 class SettingsActivity : AppCompatPreferenceActivity(), SettingsView {
-
     private lateinit var presenter: SettingsActivityPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         presenter = SettingsActivityPresenter(this)
+    }
 
-        setupActionBar()
+    override fun setupActionBar() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun startFloatingDeviceInfoService() {
         startService(Intent(this, FloatingDeviceInfoService::class.java))
     }
 
-    /**
-     * Set up the [android.app.ActionBar], if the API is available.
-     */
-    private fun setupActionBar() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
 
     /**
      * {@inheritDoc}
