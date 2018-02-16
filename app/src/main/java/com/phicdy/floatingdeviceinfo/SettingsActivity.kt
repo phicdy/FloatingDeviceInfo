@@ -14,6 +14,7 @@ import android.preference.PreferenceActivity
 import android.preference.PreferenceFragment
 import android.preference.PreferenceManager
 import android.preference.RingtonePreference
+import android.provider.Settings
 import android.text.TextUtils
 import android.view.MenuItem
 import com.phicdy.floatingdeviceinfo.presenter.SettingsActivityPresenter
@@ -30,12 +31,18 @@ import com.phicdy.floatingdeviceinfo.view.activity.SettingsView
  * for more information on developing a Settings UI.
  */
 class SettingsActivity : AppCompatPreferenceActivity(), SettingsView {
+
     private lateinit var presenter: SettingsActivityPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         presenter = SettingsActivityPresenter(this)
+        presenter.onCreate()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.onResume()
     }
 
     override fun setupActionBar() {
@@ -46,6 +53,18 @@ class SettingsActivity : AppCompatPreferenceActivity(), SettingsView {
         startService(Intent(this, FloatingDeviceInfoService::class.java))
     }
 
+    override fun startPermissionCheck() {
+        presenter.onStartPermissionCheck(this)
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    override fun openSystemAlertSetting() {
+        val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
+        startActivityForResult(intent, 0)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    }
 
     /**
      * {@inheritDoc}
